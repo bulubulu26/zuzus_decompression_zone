@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Zuzu's Decompression Zone — a cozy, satisfying fruit-smashing stress-relief game. Smash 30 fruits as fast as you can!" />
+  <title>Zuzu's Decompression Zone 🍓</title>
+
+  <!-- Pixel Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body class="theme-default">
+
+  <!-- ══════════ DYNAMIC ANIMATED BACKGROUND ══════════ -->
+  <div id="bg-layer">
+    <div class="bg-sky"></div>
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+    <div id="theme-particles"></div>
+    <div class="bg-hills"></div>
+    <div class="bg-ground"></div>
+    <div class="flower flower-1">🌻</div>
+    <div class="flower flower-2">🌻</div>
+    <div class="flower flower-3">🌸</div>
+    <div class="flower flower-4">🌸</div>
+  </div>
+
+  <!-- ══════════ PIXEL CATS (Cheer Squad) ══════════ -->
+  <!-- 🤍 Marshmallow — Bottom-Left -->
+  <div class="cat cat-white" id="cat-white" aria-label="Marshmallow the White Cat">
+    <div class="cat-name-tag">🤍 Marshmallow</div>
+    <div class="cat-body"></div>
+    <div class="speech-bubble" id="bubble-white"></div>
+  </div>
+
+  <!-- 🍊 Mango — Bottom-Right -->
+  <div class="cat cat-orange" id="cat-orange" aria-label="Mango the Orange Tabby">
+    <div class="cat-name-tag">🍊 Mango</div>
+    <div class="cat-body"></div>
+    <div class="speech-bubble" id="bubble-orange"></div>
+  </div>
+
+  <!-- 🖤 Midnight — Top-Left -->
+  <div class="cat cat-black" id="cat-black" aria-label="Midnight the Black Cat">
+    <div class="cat-name-tag">🖤 Midnight</div>
+    <div class="cat-body"></div>
+    <div class="speech-bubble" id="bubble-black"></div>
+  </div>
+
+  <!-- 🌸 Patches — Top-Right -->
+  <div class="cat cat-calico" id="cat-calico" aria-label="Patches the Calico Cat">
+    <div class="cat-name-tag">🌸 Patches</div>
+    <div class="cat-body"></div>
+    <div class="speech-bubble" id="bubble-calico"></div>
+  </div>
+
+  <!-- ══════════ MUSIC PLAYER ══════════ -->
+  <div id="music-player" aria-label="Lo-fi music player">
+    <div class="music-icon" id="music-toggle" role="button" tabindex="0" aria-label="Toggle music">♪</div>
+    <div class="music-info">
+      <div class="music-title" id="music-title">Cozy Farm Beats</div>
+      <div class="music-bar">
+        <span class="bar-dot"></span><span class="bar-dot"></span>
+        <span class="bar-dot"></span><span class="bar-dot"></span>
+        <span class="bar-dot"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ CURRENT THEME BADGE ══════════ -->
+  <div id="theme-badge" aria-label="Active environment theme">
+    <span id="theme-name-text">🌅 Sunset Meadow</span>
+  </div>
+
+  <!-- ══════════ HEADER BANNER ══════════ -->
+  <header id="game-header">
+    <div class="wood-sign">
+      <span class="sign-nail nail-left">●</span>
+      <h1 id="game-title">Zuzu's<br/>Decompression Zone</h1>
+      <span class="sign-nail nail-right">●</span>
+    </div>
+  </header>
+
+  <!-- ══════════ HUD ══════════ -->
+  <div id="hud">
+    <div class="hud-box" id="smash-counter">
+      <span class="hud-label">SMASHED</span>
+      <span class="hud-value"><span id="smash-count">0</span> / 30</span>
+    </div>
+    <div class="hud-box" id="timer-box">
+      <span class="hud-label">TIME</span>
+      <span class="hud-value" id="timer-display">00.000</span>
+    </div>
+  </div>
+
+  <!-- ══════════ GAME CANVAS LAYER ══════════ -->
+  <div id="game-area" aria-label="Game area — tap fruits to smash them!">
+    <div id="particle-container"></div>
+  </div>
+
+  <!-- ══════════ VICTORY POPUP ══════════ -->
+  <div id="victory-overlay" class="hidden" role="dialog" aria-modal="true" aria-labelledby="victory-title">
+    <div id="victory-popup">
+      <div class="popup-nail popup-nail-tl">●</div>
+      <div class="popup-nail popup-nail-tr">●</div>
+      <div class="popup-nail popup-nail-bl">●</div>
+      <div class="popup-nail popup-nail-br">●</div>
+
+      <div class="popup-stars">⭐⭐⭐</div>
+      <h2 id="victory-title">Decompressed!</h2>
+      <p class="popup-subtitle">Zuzu & the cats smashed 'em all! 🍉🍓</p>
+
+      <div class="score-rows">
+        <div class="score-row" id="row-current">
+          <span class="score-label">This Run</span>
+          <span class="score-value" id="score-current">—</span>
+        </div>
+        <div class="score-row" id="row-previous">
+          <span class="score-label">Last Time</span>
+          <span class="score-value" id="score-previous">—</span>
+        </div>
+        <div class="score-row score-row--best" id="row-best">
+          <span class="score-label">🏆 Best</span>
+          <span class="score-value" id="score-best">—</span>
+        </div>
+      </div>
+
+      <div id="new-record-badge" class="hidden">✨ NEW RECORD! ✨</div>
+
+      <button id="play-again-btn" class="wood-btn" aria-label="Play again">
+        ▶ PLAY AGAIN
+      </button>
+    </div>
+  </div>
+
+  <script src="./js/game.js"></script>
+</body>
+</html>

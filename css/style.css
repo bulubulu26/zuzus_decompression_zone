@@ -1,0 +1,786 @@
+/* ==========================================================================
+   Zuzu's Decompression Zone - Main CSS Style
+   ========================================================================== */
+
+:root {
+  --wood-dark: #4a2e1b;
+  --wood-mid: #7c4d28;
+  --wood-light: #b87b43;
+  --wood-border: #2c1a0e;
+  --wood-accent: #e5a968;
+  --cream-bg: #fff5e6;
+  --text-dark: #3a2212;
+  --text-gold: #ffde59;
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-retro: 'VT323', monospace;
+
+  /* Theme Defaults (Cozy Farm) */
+  --sky-grad-top: #87ceeb;
+  --sky-grad-mid: #cbe7ff;
+  --sky-grad-bot: #fff0d4;
+  --hill-color: #a3d977;
+  --hill-shadow: #8cc660;
+  --ground-top: #7ec850;
+  --ground-mid: #5ca433;
+  --ground-bot: #3e7920;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  font-family: var(--font-retro);
+  background-color: var(--sky-grad-top);
+  touch-action: manipulation;
+  transition: background-color 0.5s ease;
+}
+
+/* --------------------------------------------------------------------------
+   THEME STYLES (Switched via JS on Refresh)
+   -------------------------------------------------------------------------- */
+
+/* 🌅 Theme 1: Sunset Meadow */
+body.theme-sunset {
+  --sky-grad-top: #2b1055;
+  --sky-grad-mid: #75225b;
+  --sky-grad-bot: #b5495b;
+  --hill-color: #512b58;
+  --hill-shadow: #3b1c41;
+  --ground-top: #2b1b36;
+  --ground-mid: #1d1026;
+  --ground-bot: #110719;
+}
+
+/* 🌌 Theme 2: Midnight Starlight */
+body.theme-starlight {
+  --sky-grad-top: #0a0e29;
+  --sky-grad-mid: #171c47;
+  --sky-grad-bot: #2c296b;
+  --hill-color: #1e2652;
+  --hill-shadow: #141a3d;
+  --ground-top: #151b3d;
+  --ground-mid: #0d122b;
+  --ground-bot: #070919;
+}
+
+/* 🌸 Theme 3: Sakura Spring */
+body.theme-sakura {
+  --sky-grad-top: #ffc2d1;
+  --sky-grad-mid: #ffe5ec;
+  --sky-grad-bot: #ffffff;
+  --hill-color: #b7e4c7;
+  --hill-shadow: #95d5b2;
+  --ground-top: #74c69d;
+  --ground-mid: #52b788;
+  --ground-bot: #40916c;
+}
+
+/* 🍂 Theme 4: Autumn Harvest */
+body.theme-autumn {
+  --sky-grad-top: #d46a2a;
+  --sky-grad-mid: #e8984e;
+  --sky-grad-bot: #f7d08a;
+  --hill-color: #b3541e;
+  --hill-shadow: #8f3f11;
+  --ground-top: #7a320c;
+  --ground-mid: #592306;
+  --ground-bot: #3a1502;
+}
+
+/* ☀️ Theme 5: Cozy Daytime */
+body.theme-cozy {
+  --sky-grad-top: #7ec8eb;
+  --sky-grad-mid: #bce3ff;
+  --sky-grad-bot: #fffae8;
+  --hill-color: #92d45c;
+  --hill-shadow: #75b83f;
+  --ground-top: #6bb839;
+  --ground-mid: #4b9420;
+  --ground-bot: #316911;
+}
+
+/* --------------------------------------------------------------------------
+   Background Layer (Dynamic Farm Vibe)
+   -------------------------------------------------------------------------- */
+#bg-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.bg-sky {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(to bottom, var(--sky-grad-top) 0%, var(--sky-grad-mid) 65%, var(--sky-grad-bot) 100%);
+  transition: background 0.5s ease;
+}
+
+.cloud {
+  position: absolute;
+  background: #ffffff;
+  border-radius: 50px;
+  opacity: 0.9;
+  filter: drop-shadow(0 4px 0 rgba(0, 0, 0, 0.05));
+}
+.cloud::before, .cloud::after {
+  content: '';
+  position: absolute;
+  background: #ffffff;
+  border-radius: 50%;
+}
+.cloud-1 {
+  width: 130px; height: 38px; top: 12%; left: -140px;
+  animation: floatCloud 28s linear infinite;
+}
+.cloud-1::before { width: 52px; height: 52px; top: -20px; left: 18px; }
+.cloud-1::after { width: 38px; height: 38px; top: -12px; left: 60px; }
+
+.cloud-2 {
+  width: 170px; height: 46px; top: 22%; left: -180px;
+  animation: floatCloud 36s linear infinite 12s;
+}
+.cloud-2::before { width: 68px; height: 68px; top: -28px; left: 24px; }
+.cloud-2::after { width: 46px; height: 46px; top: -16px; left: 85px; }
+
+.cloud-3 {
+  width: 110px; height: 32px; top: 8%; left: -120px;
+  animation: floatCloud 24s linear infinite 6s;
+}
+.cloud-3::before { width: 44px; height: 44px; top: -16px; left: 14px; }
+.cloud-3::after { width: 32px; height: 32px; top: -10px; left: 48px; }
+
+@keyframes floatCloud {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(100vw + 250px)); }
+}
+
+/* Theme Floating Particle Overlay (petals, fireflies, leaves) */
+#theme-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.theme-sparkle {
+  position: absolute;
+  pointer-events: none;
+  animation: floatSparkle linear infinite;
+}
+
+@keyframes floatSparkle {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  20% { opacity: 0.9; }
+  80% { opacity: 0.9; }
+  100% { transform: translateY(calc(100vh + 50px)) rotate(360deg); opacity: 0; }
+}
+
+.bg-hills {
+  position: absolute;
+  top: 45%;
+  width: 100%;
+  height: 25%;
+  background: var(--hill-color);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  transform: scaleX(1.4);
+  box-shadow: inset 0 10px 0 var(--hill-shadow);
+  transition: background 0.5s ease;
+}
+
+.bg-ground {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 38%;
+  background: linear-gradient(to bottom, var(--ground-top) 0%, var(--ground-mid) 40%, var(--ground-bot) 100%);
+  border-top: 6px solid rgba(0, 0, 0, 0.15);
+  transition: background 0.5s ease;
+}
+
+.flower {
+  position: absolute;
+  font-size: 1.9rem;
+  bottom: 12%;
+  animation: sway 3s ease-in-out infinite alternate;
+  filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.15));
+}
+.flower-1 { left: 8%; animation-delay: 0s; }
+.flower-2 { left: 22%; animation-delay: 0.7s; }
+.flower-3 { right: 15%; animation-delay: 1.2s; }
+.flower-4 { right: 28%; animation-delay: 0.4s; }
+
+@keyframes sway {
+  0% { transform: rotate(-6deg); }
+  100% { transform: rotate(6deg); }
+}
+
+/* --------------------------------------------------------------------------
+   Header Title Banner (Wood Sign)
+   -------------------------------------------------------------------------- */
+#game-header {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: none;
+  width: 92%;
+  max-width: 440px;
+}
+
+.wood-sign {
+  position: relative;
+  background: linear-gradient(180deg, var(--wood-light) 0%, var(--wood-mid) 60%, var(--wood-dark) 100%);
+  border: 4px solid var(--wood-border);
+  border-radius: 14px;
+  padding: 10px 16px;
+  text-align: center;
+  box-shadow: 0 6px 0 var(--wood-border), 0 10px 20px var(--shadow-color);
+}
+
+.wood-sign::before {
+  content: '';
+  position: absolute;
+  top: 3px; left: 3px; right: 3px; bottom: 3px;
+  border: 2px dashed rgba(255, 255, 255, 0.25);
+  border-radius: 9px;
+  pointer-events: none;
+}
+
+.sign-nail {
+  position: absolute;
+  top: 6px;
+  font-size: 8px;
+  color: #1a1008;
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.3);
+}
+.nail-left { left: 10px; }
+.nail-right { right: 10px; }
+
+#game-title {
+  font-family: var(--font-pixel);
+  font-size: 0.95rem;
+  line-height: 1.35;
+  color: var(--text-gold);
+  text-shadow: 2px 2px 0 #3a1a00, -2px -2px 0 #3a1a00, 2px -2px 0 #3a1a00, -2px 2px 0 #3a1a00, 0 4px 0 #1a0a00;
+  letter-spacing: 1px;
+}
+
+/* --------------------------------------------------------------------------
+   HUD Elements (Counter & Timer)
+   -------------------------------------------------------------------------- */
+#hud {
+  position: absolute;
+  top: 88px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+
+.hud-box {
+  background: linear-gradient(180deg, #fff5d6 0%, #edd39a 100%);
+  border: 3px solid var(--wood-border);
+  border-radius: 8px;
+  padding: 6px 14px;
+  text-align: center;
+  box-shadow: 0 4px 0 var(--wood-border);
+  min-width: 135px;
+}
+
+.hud-label {
+  display: block;
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: #6b401e;
+  margin-bottom: 2px;
+}
+
+.hud-value {
+  font-family: var(--font-retro);
+  font-size: 1.65rem;
+  font-weight: bold;
+  color: var(--text-dark);
+  text-shadow: 1px 1px 0 #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   Music Player Widget (Top-Right)
+   -------------------------------------------------------------------------- */
+#music-player {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, #fff8eb 0%, #eed5b0 100%);
+  border: 3px solid var(--wood-border);
+  border-radius: 20px;
+  padding: 5px 12px 5px 6px;
+  box-shadow: 0 4px 0 var(--wood-border);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+#music-player:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--wood-border);
+}
+
+.music-icon {
+  width: 30px;
+  height: 30px;
+  background: var(--wood-mid);
+  color: var(--text-gold);
+  border: 2px solid var(--wood-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-family: var(--font-pixel);
+}
+
+.music-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.music-title {
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  color: var(--wood-dark);
+}
+
+.music-bar {
+  display: flex;
+  gap: 3px;
+  margin-top: 2px;
+}
+
+.bar-dot {
+  width: 4px;
+  height: 8px;
+  background: var(--wood-mid);
+  border-radius: 2px;
+}
+
+#music-player.playing .bar-dot {
+  animation: pulseBar 0.6s ease-in-out infinite alternate;
+}
+
+#music-player.playing .bar-dot:nth-child(2) { animation-delay: 0.15s; }
+#music-player.playing .bar-dot:nth-child(3) { animation-delay: 0.3s; }
+#music-player.playing .bar-dot:nth-child(4) { animation-delay: 0.45s; }
+
+@keyframes pulseBar {
+  0% { height: 4px; background: var(--wood-mid); }
+  100% { height: 12px; background: #e06d2d; }
+}
+
+/* --------------------------------------------------------------------------
+   Theme Badge (Top-Left)
+   -------------------------------------------------------------------------- */
+#theme-badge {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  z-index: 20;
+  background: linear-gradient(180deg, #fff8eb 0%, #eed5b0 100%);
+  border: 2px solid var(--wood-border);
+  border-radius: 14px;
+  padding: 4px 10px;
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  color: var(--wood-dark);
+  box-shadow: 0 3px 0 var(--wood-border);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   The Cheer Squad (Bigger Pixel Cats + Name Tags)
+   -------------------------------------------------------------------------- */
+.cat {
+  position: absolute;
+  z-index: 8;
+  pointer-events: none;
+  width: 90px;
+  height: 90px;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cat-name-tag {
+  background: linear-gradient(180deg, #fff6e5 0%, #ebd0a7 100%);
+  border: 2px solid var(--wood-border);
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  color: var(--wood-dark);
+  white-space: nowrap;
+  box-shadow: 0 2px 0 var(--wood-border);
+  margin-bottom: 2px;
+  z-index: 9;
+}
+
+/* Cat Body Pixel Art via SVG background */
+.cat-body {
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  filter: drop-shadow(0 5px 0 rgba(0,0,0,0.25));
+}
+
+/* Positions for 4 Cats (Slightly inside padding) */
+.cat-white { bottom: 15px; left: 15px; }
+.cat-orange { bottom: 15px; right: 15px; }
+.cat-black { top: 145px; left: 15px; }
+.cat-calico { top: 145px; right: 15px; }
+
+/* SVG Cat Sprites */
+.cat-white .cat-body {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'><path fill='%23ffffff' d='M4 3h2v1H4zM10 3h2v1h-2zM3 4h4v3H3zM9 4h4v3H9zM2 7h12v7H2z'/><path fill='%23ffb6c1' d='M4 4h1v1H4zM11 4h1v1h-1zM7 9h2v1H7z'/><path fill='%23000000' d='M4 6h2v2H4zM10 6h2v2h-2zM7 8h2v1H7z'/><path fill='%23ff85a2' d='M2 10h2v2H2zM12 10h2v2h-2z'/></svg>");
+}
+
+.cat-orange .cat-body {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'><path fill='%23e67e22' d='M4 3h2v1H4zM10 3h2v1h-2zM3 4h4v3H3zM9 4h4v3H9zM2 7h12v7H2z'/><path fill='%23d35400' d='M7 4h2v3H7zM7 11h2v3H7z'/><path fill='%23ffb6c1' d='M4 4h1v1H4zM11 4h1v1h-1z'/><path fill='%23000000' d='M4 6h2v2H4zM10 6h2v2h-2zM7 8h2v1H7z'/><path fill='%23ff85a2' d='M2 10h2v2H2zM12 10h2v2h-2z'/></svg>");
+}
+
+.cat-black .cat-body {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'><path fill='%232c3e50' d='M4 3h2v1H4zM10 3h2v1h-2zM3 4h4v3H3zM9 4h4v3H9zM2 7h12v7H2z'/><path fill='%23ffb6c1' d='M4 4h1v1H4zM11 4h1v1h-1z'/><path fill='%23f1c40f' d='M4 6h2v2H4zM10 6h2v2h-2z'/><path fill='%23000000' d='M5 6h1v2H5zM11 6h1v2h-1zM7 8h2v1H7z'/><path fill='%23ff85a2' d='M2 10h2v2H2zM12 10h2v2h-2z'/></svg>");
+}
+
+.cat-calico .cat-body {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'><path fill='%23ffffff' d='M4 3h2v1H4zM10 3h2v1h-2zM3 4h4v3H3zM9 4h4v3H9zM2 7h12v7H2z'/><path fill='%23e67e22' d='M3 4h2v3H3zM2 7h4v4H2z'/><path fill='%232c3e50' d='M11 4h2v3h-2zM10 7h4v4h-4z'/><path fill='%23ffb6c1' d='M4 4h1v1H4zM11 4h1v1h-1z'/><path fill='%23000000' d='M4 6h2v2H4zM10 6h2v2h-2zM7 8h2v1H7z'/><path fill='%23ff85a2' d='M2 10h2v2H2zM12 10h2v2h-2z'/></svg>");
+}
+
+/* Cat Jump Cheer Animation */
+.cat.cheer {
+  animation: catJump 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes catJump {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-28px) scale(1.18, 0.82); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* Speech Bubbles */
+.speech-bubble {
+  position: absolute;
+  background: #ffffff;
+  border: 2px solid var(--wood-border);
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: var(--wood-dark);
+  white-space: nowrap;
+  opacity: 0;
+  transform: scale(0.5) translateY(10px);
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.15);
+  z-index: 12;
+}
+
+.cat-white .speech-bubble { bottom: 95px; left: 0; }
+.cat-orange .speech-bubble { bottom: 95px; right: 0; }
+.cat-black .speech-bubble { top: 95px; left: 0; }
+.cat-calico .speech-bubble { top: 95px; right: 0; }
+
+.speech-bubble.pop {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   Game Area & Floating Fruits
+   -------------------------------------------------------------------------- */
+#game-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  touch-action: none;
+}
+
+.fruit-target {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  margin-left: -50px;
+  margin-top: -50px;
+  cursor: pointer;
+  z-index: 6;
+  touch-action: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fruit-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 6px 5px rgba(0, 0, 0, 0.25));
+  transition: transform 0.05s ease;
+}
+
+.fruit-target:active .fruit-img {
+  transform: scale(0.9);
+}
+
+/* Splat Fruit Effect */
+.splat-effect {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  margin-left: -60px;
+  margin-top: -60px;
+  pointer-events: none;
+  z-index: 7;
+  animation: splatFade 0.6s ease-out forwards;
+}
+
+@keyframes splatFade {
+  0% { transform: scale(0.8) rotate(0deg); opacity: 1; }
+  30% { transform: scale(1.35) rotate(15deg); opacity: 1; }
+  100% { transform: scale(1.45) rotate(20deg); opacity: 0; }
+}
+
+/* Particles */
+#particle-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 7;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: particleBurst 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes particleBurst {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+}
+
+/* Floating Text "+1" */
+.floating-score {
+  position: absolute;
+  font-family: var(--font-pixel);
+  font-size: 1.3rem;
+  color: var(--text-gold);
+  text-shadow: 2px 2px 0 var(--wood-border);
+  pointer-events: none;
+  z-index: 8;
+  animation: floatUp 0.6s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-45px) scale(1.35); opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   Overlays & Dialog Popups (Stardew Style)
+   -------------------------------------------------------------------------- */
+#start-overlay, #victory-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: opacity 0.3s ease;
+}
+
+#start-overlay.hidden, #victory-overlay.hidden {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#start-popup, #victory-popup {
+  position: relative;
+  width: 100%;
+  max-width: 370px;
+  background: linear-gradient(180deg, #fff3db 0%, #ebd0a0 100%);
+  border: 6px solid var(--wood-border);
+  border-radius: 16px;
+  padding: 24px 20px;
+  text-align: center;
+  box-shadow: 0 10px 0 var(--wood-border), 0 15px 30px rgba(0, 0, 0, 0.5);
+  animation: popupSlide 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popupSlide {
+  0% { transform: scale(0.7) translateY(40px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.popup-nail {
+  position: absolute;
+  font-size: 10px;
+  color: var(--wood-border);
+}
+.popup-nail-tl { top: 8px; left: 10px; }
+.popup-nail-tr { top: 8px; right: 10px; }
+.popup-nail-bl { bottom: 8px; left: 10px; }
+.popup-nail-br { bottom: 8px; right: 10px; }
+
+.start-emoji, .popup-stars {
+  font-size: 2.3rem;
+  margin-bottom: 8px;
+}
+
+#start-title, #victory-title {
+  font-family: var(--font-pixel);
+  font-size: 1.2rem;
+  color: var(--wood-dark);
+  line-height: 1.3;
+  margin-bottom: 8px;
+  text-shadow: 1px 1px 0 #ffffff;
+}
+
+.popup-subtitle {
+  font-family: var(--font-retro);
+  font-size: 1.25rem;
+  color: #5c3c21;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.score-rows {
+  background: rgba(255, 255, 255, 0.65);
+  border: 3px solid var(--wood-border);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+  border-bottom: 1px dashed #d1b184;
+}
+
+.score-row:last-child {
+  border-bottom: none;
+}
+
+.score-row--best {
+  background: #fff3a8;
+  border-radius: 6px;
+  border-bottom: none;
+}
+
+.score-label {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  color: var(--wood-dark);
+}
+
+.score-value {
+  font-family: var(--font-retro);
+  font-size: 1.55rem;
+  font-weight: bold;
+  color: #8b0000;
+}
+
+#new-record-badge {
+  font-family: var(--font-pixel);
+  font-size: 0.75rem;
+  color: #d9381e;
+  background: #ffecb3;
+  border: 2px solid #d9381e;
+  border-radius: 20px;
+  padding: 6px 12px;
+  margin-bottom: 14px;
+  animation: pulseBadge 0.6s infinite alternate;
+}
+
+#new-record-badge.hidden {
+  display: none;
+}
+
+@keyframes pulseBadge {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+
+/* Wood Buttons */
+.wood-btn {
+  width: 100%;
+  background: linear-gradient(180deg, #5cb85c 0%, #388e3c 100%);
+  border: 3px solid var(--wood-border);
+  border-radius: 10px;
+  padding: 14px;
+  font-family: var(--font-pixel);
+  font-size: 0.95rem;
+  color: #ffffff;
+  text-shadow: 2px 2px 0 var(--wood-border);
+  box-shadow: 0 5px 0 var(--wood-border);
+  cursor: pointer;
+  transition: all 0.1s ease;
+  margin-bottom: 8px;
+}
+
+.wood-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--wood-border);
+}
+
+.wood-btn--secondary {
+  background: linear-gradient(180deg, #ff9800 0%, #f57c00 100%);
+  margin-bottom: 0;
+}
